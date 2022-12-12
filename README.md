@@ -53,7 +53,9 @@ The first set are classification examples. They are developed models which repre
 The next examples are the following:
 
 *Tennis*
+
 The petri net model for tennis is quite simple. It has two players, Player1 and Player2, each represented by a Place. The transitions connecting the two players, are representative of the players hitting the ball. If Player1 hits the ball, the ball or token in this case, will go to Player2 and vice-versa. This model creates a loop due to this. Since there is only one ball used to play tennis, there is one initial token in the model, as indicated by Player1's token count. 
 
 *Order Processing*
+
 The petri net model for order processing is a more complex example of a process which can be modeled by petri nets. Each transition represents an action that is being done/taken in regards to the order while each Place represents the status of the order at different times in the processing. A single token is used to represent the order. 
