@@ -239,14 +239,12 @@ define([
             this.$btnResetPetriNet.show()
             this.$btnSingleEvent.show()
             this.$btnEventSelector.show()
-            this.$btnDeadlockIndicator.hide()
           }
           else {
             this.$btnPetriNetClassification.show()
             this.$btnResetPetriNet.show()
             this.$btnSingleEvent.hide()
             this.$btnEventSelector.hide()
-            this.$btnDeadlockIndicator.show()
           }
         } else {
             this._initializeToolbar();
@@ -304,7 +302,7 @@ define([
         this.$btnResetPetriNet = toolBar.addButton({
             title: 'Reset Petri Net',
             icon: 'glyphicon glyphicon-refresh',
-            clickFn: function (/*data*/) {
+            clickFn: function (data) {
                 self._widget.resetPetriNet();
             }
         });
@@ -321,7 +319,7 @@ define([
         this.$btnSingleEvent = toolBar.addButton({
             title: 'Fire event',
             icon: 'glyphicon glyphicon-play',
-            clickFn: function (/*data*/) {
+            clickFn: function (data) {
               self._widget.fireEvent(self._fireableEvents[0]);
             }
         });
@@ -395,3 +393,98 @@ export const getTransitionToPlaceArcs = (client, elementIds) => {
   })
   return arcs
 }
+
+export const _checkPetriNetDeadlock = (petriNet) => {
+  return Object.keys(petriNet['transitions']).every((transition) => {
+    getInplacesForTransition(transitions, petriNet['outplaces']).every(
+      (id) => {
+        petriNet['places'][id]['tokens'] <= 0;
+      }
+    );
+  });
+};
+
+export const getOutTransitionsForPlace = (elementId, outplaces) => {
+  return Object.keys(outplaces[elementId]).filter(
+    (transition) => outplaces[elementId][transition]
+  );
+};
+
+export const getInTransitionsForPlace = (elementId, inplaces) => {
+  return Object.keys(inplaces[elementId]).filter(
+    (transition) => inplaces[elementId][transition]
+  );
+};
+
+export const getInPlacesForTransition = (elementId, outplaces) => {
+  return Object.keys(outplaces).filter(
+    (place) => outplaces[place][elementId]
+  );
+};
+
+export const getOutPlacesForTransition = (elementId, inplaces) => {
+  return Object.keys(inputMatrix).filter(
+    (place) => inplaces[place][elementId]
+  );
+};
+
+export const getSource = (inplaces) => {
+  for (const place in inplaces) {
+    checkFlow = Object.entries(inplaces[place]).every((element) => {
+      return !element[1];
+    });
+    if (checkFlow) {
+      return place
+    }
+  }
+  return inplaces[0]
+};
+
+export const neighbors = (elementId, placeToTransitionArcs, transitionToPlaceArcs) => {
+  var neighbors = [];
+  var outArcs = placeToTransitionArcs.filter((arc) => arc['src'] === elementId);
+  outArcs.forEach((out_arc) => {
+    filter_list = transitionToPlaceArcs.filter((out_arc) => out_arc['src'] === out_arc['dst'])
+    get_destinations = filter_list.map((out_arc) => {
+        if (out_arc['src'] === out_arc['dst']) {
+          return out_arc['dst'];
+        }
+      })
+    neighbors.push(get_destinations);
+  });
+  return neighbors;
+};
+
+export const getArcsFromPlace = (elementId, placeToTransitionArcs) => {
+  return placeToTransitionArcs.filter((arc) => arc['src'] === elementId);
+};
+
+export const getArcsFromTransition = (elementId, transitionToPlaceArcs) => {
+  return transitionToPlaceArcs.filter((arc) => arc['src'] === elementId);
+};
+
+export const getOutplaces= (placeToTransitionArcs, places, transitions) => {
+  let outplaces = {};
+  places.forEach((place, i) => {
+    outplaces[place] = {};
+    transitions.forEach((transition, j) => {
+      outputMatrix[place][transition] = placeToTransitionArcs.any((arc, i) => {
+        return arc['src'] === place && arc['dst'] === transition;
+      });
+    });
+  });
+  return outplaces;
+};
+
+export const getInplaces = (transitionToPlaceArcs, places, transitions) => {
+  let inplaces = {};
+  places.forEach((place, i) => {
+    inplaces[place] = {};
+    transitions.forEach((transition, j) => {
+      inplaces[place][transition] = transitionToPlaceArcs.some((arc, i) => {
+        return arc['src'] === transition && arc['dst'] === place;
+      });
+    });
+  });
+  return inplaces;
+};

@@ -45,6 +45,15 @@ The plugin/interpreter can be executed in the following ways:
 1. Click on the dropdown indicator on the play button (left most button in the toolbar) which will dropdown a list that will contain 'PetriNetClassification.' Click on it. This will render a pop-up modal. Click on the 'Run...' button. This will execute the plugin for classification and the output will appear in the notifications. 
 2. The interpreter can also be executed by clicking on the 'SimPetriNet' visualizer in the visualizer selector. There the toolbar will be populated with more buttons. Click on the magnifying glass icon button to execute the classification interpreter. Output will also appear in the notifications. 
 
+## Simulator -- STILL UNDER DEVELOPMENT
+You can simulate the movement of tokens through a Petri Net through using the 'SimPetriNet' Visualizer.
+
+The visualizer enables a series of buttons in the toolbar that allows for different functions:
+1. The Magnifying Glass Icon - This runs the plugin/interpreter for classification as mentioned above. 
+2. The Reset Icon - This resets the Petri Net to it's initial settings so tokens return to their respective places and counts.
+3. The Play Button - Fires all enabled transitions.
+4. The Dropdown - Selecting an enabled event, fires the enabled event.
+
 ## Examples
 Within the Petri Net Seed, there are a number of examples. 
 
