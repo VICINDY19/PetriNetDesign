@@ -201,9 +201,9 @@ class PetriNetClassification(PluginBase):
             overall_paths.insert(0, loop)
             loop = sources_set[loop]
             
-      if len(overall_paths) != 0:
-        if overall_paths[0] == sourcePlace['path'] and overall_paths[len(overall_paths)-1] == sinkPlace['path']:
-          return True
+        if len(overall_paths) != 0:
+          if overall_paths[0] == sourcePlace['path'] and overall_paths[len(overall_paths)-1] == sinkPlace['path']:
+            return True
       
       return False
     
