@@ -76,20 +76,28 @@ define([/*jointjs,*/'css!./styles/SimPetriNetWidget.css'], function (/*joint*/) 
         }
     };
 
-    /*SimPetriNetWidget.prototype.fireEvent = function (element, places) {
-    element.paths_from.forEach(p => {
+    SimPetriNetWidget.prototype.fireEvent = function (element) {
+    /*element.paths_from.forEach(p => {
         if (p.tokens > 0)
             this._webgmePetriNet.places[p.id].tokens -= 1
     })
 
     element.paths_from.forEach(p => {
         this._webgmePetriNet.places[p.id].tokens += 1
-    })
+    })*/
   }
 
   SimPetriNetWidget.prototype.resetPetriNet = function () {
       return
-  };*/
+  };
+
+  SimPetriNetWidget.prototype.initPetriNet = function (petriNet) {
+      return
+  };
+
+  SimPetriNetWidget.prototype.destroyPetriNet = function (petriNet) {
+      return
+  };
 
     /* * * * * * * * Visualizer event handlers * * * * * * * */
 

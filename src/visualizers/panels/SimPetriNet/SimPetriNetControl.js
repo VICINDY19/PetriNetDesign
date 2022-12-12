@@ -160,8 +160,8 @@ define([
             pos: node.getRegistry('position'),
             name: node.getAttribute('name'),
             tokens: node.getAttribute('tokens'),
-            inPlaces: getInplacesForTransition(elementId, inplaces),
-            outplaces: getOutplacesForTransition(elementId, outplaces),
+            inPlaces: getInPlacesForTransition(elementId, inplaces),
+            outplaces: getOutPlacesForTransition(elementId, outplaces),
             connectors: getArcsFromTransition(elementId, transitionToPlaceArcs)
           }
         }
@@ -423,7 +423,7 @@ let getInPlacesForTransition = (elementId, outplaces) => {
 };
 
 let getOutPlacesForTransition = (elementId, inplaces) => {
-  return Object.keys(inputMatrix).filter(
+  return Object.keys(inplaces).filter(
     (place) => inplaces[place][elementId]
   );
 };
