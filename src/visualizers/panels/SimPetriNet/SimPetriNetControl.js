@@ -332,13 +332,13 @@ define([
 });
 
 // HELPER FUNCTIONS
-export const getMeta = (client, node) => {
+let getMeta = (client, node) => {
   var metaId = node.getMetaTypeId()
-  let node = client.getNode(metaId)
-  return node.getAttribute('name')
+  let metaNode = client.getNode(metaId)
+  return metaNode.getAttribute('name')
 }
 
-export const getPlaces = (client, elementIds) => {
+let getPlaces = (client, elementIds) => {
   var places_list = []
   elementIds.forEach(id => {
     var node = client.getNode(id)
@@ -349,7 +349,7 @@ export const getPlaces = (client, elementIds) => {
   return places_list
 }
 
-export const getTransitions = (client, elementIds) => {
+let getTransitions = (client, elementIds) => {
   var transitions_list = []
   elementIds.forEach(id => {
     var node = client.getNode(id)
@@ -360,7 +360,7 @@ export const getTransitions = (client, elementIds) => {
   return transitions_list
 }
 
-export const getPlaceToTransitionArcs = (client, elementIds) => {
+let getPlaceToTransitionArcs = (client, elementIds) => {
   var arcs = [];
   elementIds.forEach(id => {
     var node = client.getNode(id)
@@ -377,7 +377,7 @@ export const getPlaceToTransitionArcs = (client, elementIds) => {
   return arcs
 }
 
-export const getTransitionToPlaceArcs = (client, elementIds) => {
+let getTransitionToPlaceArcs = (client, elementIds) => {
   var arcs = [];
   elementIds.forEach(id => {
     var node = client.getNode(id)
@@ -394,7 +394,7 @@ export const getTransitionToPlaceArcs = (client, elementIds) => {
   return arcs
 }
 
-export const _checkPetriNetDeadlock = (petriNet) => {
+let _checkPetriNetDeadlock = (petriNet) => {
   return Object.keys(petriNet['transitions']).every((transition) => {
     getInplacesForTransition(transitions, petriNet['outplaces']).every(
       (id) => {
@@ -404,31 +404,31 @@ export const _checkPetriNetDeadlock = (petriNet) => {
   });
 };
 
-export const getOutTransitionsForPlace = (elementId, outplaces) => {
+let getOutTransitionsForPlace = (elementId, outplaces) => {
   return Object.keys(outplaces[elementId]).filter(
     (transition) => outplaces[elementId][transition]
   );
 };
 
-export const getInTransitionsForPlace = (elementId, inplaces) => {
+let getInTransitionsForPlace = (elementId, inplaces) => {
   return Object.keys(inplaces[elementId]).filter(
     (transition) => inplaces[elementId][transition]
   );
 };
 
-export const getInPlacesForTransition = (elementId, outplaces) => {
+let getInPlacesForTransition = (elementId, outplaces) => {
   return Object.keys(outplaces).filter(
     (place) => outplaces[place][elementId]
   );
 };
 
-export const getOutPlacesForTransition = (elementId, inplaces) => {
+let getOutPlacesForTransition = (elementId, inplaces) => {
   return Object.keys(inputMatrix).filter(
     (place) => inplaces[place][elementId]
   );
 };
 
-export const getSource = (inplaces) => {
+let getSource = (inplaces) => {
   for (const place in inplaces) {
     checkFlow = Object.entries(inplaces[place]).every((element) => {
       return !element[1];
@@ -440,7 +440,7 @@ export const getSource = (inplaces) => {
   return inplaces[0]
 };
 
-export const neighbors = (elementId, placeToTransitionArcs, transitionToPlaceArcs) => {
+let getNeighbors = (elementId, placeToTransitionArcs, transitionToPlaceArcs) => {
   var neighbors = [];
   var outArcs = placeToTransitionArcs.filter((arc) => arc['src'] === elementId);
   outArcs.forEach((out_arc) => {
@@ -455,20 +455,20 @@ export const neighbors = (elementId, placeToTransitionArcs, transitionToPlaceArc
   return neighbors;
 };
 
-export const getArcsFromPlace = (elementId, placeToTransitionArcs) => {
+let getArcsFromPlace = (elementId, placeToTransitionArcs) => {
   return placeToTransitionArcs.filter((arc) => arc['src'] === elementId);
 };
 
-export const getArcsFromTransition = (elementId, transitionToPlaceArcs) => {
+let getArcsFromTransition = (elementId, transitionToPlaceArcs) => {
   return transitionToPlaceArcs.filter((arc) => arc['src'] === elementId);
 };
 
-export const getOutplaces= (placeToTransitionArcs, places, transitions) => {
+let getOutplaces= (placeToTransitionArcs, places, transitions) => {
   let outplaces = {};
   places.forEach((place, i) => {
     outplaces[place] = {};
     transitions.forEach((transition, j) => {
-      outputMatrix[place][transition] = placeToTransitionArcs.any((arc, i) => {
+      outplaces[place][transition] = placeToTransitionArcs.some((arc, i) => {
         return arc['src'] === place && arc['dst'] === transition;
       });
     });
@@ -476,7 +476,7 @@ export const getOutplaces= (placeToTransitionArcs, places, transitions) => {
   return outplaces;
 };
 
-export const getInplaces = (transitionToPlaceArcs, places, transitions) => {
+let getInplaces = (transitionToPlaceArcs, places, transitions) => {
   let inplaces = {};
   places.forEach((place, i) => {
     inplaces[place] = {};

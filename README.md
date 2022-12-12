@@ -51,8 +51,8 @@ You can simulate the movement of tokens through a Petri Net through using the 'S
 The visualizer enables a series of buttons in the toolbar that allows for different functions:
 1. The Magnifying Glass Icon - This runs the plugin/interpreter for classification as mentioned above. 
 2. The Reset Icon - This resets the Petri Net to it's initial settings so tokens return to their respective places and counts.
-3. The Play Button - Fires all enabled transitions.
-4. The Dropdown - Selecting an enabled event, fires the enabled event.
+3. The Play Button - Fires all enabled transitions. (In development)
+4. The Dropdown - Selecting an enabled event, fires the enabled event. (In development)
 
 ## Examples
 Within the Petri Net Seed, there are a number of examples. 
