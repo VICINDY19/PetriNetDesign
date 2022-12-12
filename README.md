@@ -30,7 +30,7 @@ When the design studio starts up, you will be met with a pop-up modal that will 
 
 When your new project opens, you will be at the Root. There you will see a number of already developed examples for your viewing. (Please refer to the 'Examples' section below for more detail on these examples.) To start creating your own Petri Net model, you will want to select the rectangular shaped 'PetriNet' object from the Composition list and drag it to the Root area. You can then alter it's name attribute so it is personalized. This PetriNet object will contain your actual developed Petri Net model. Once you are altered the name and are ready to start developing your model, click on the object in the Root area. It will become highlighted and have four buttons in each corner, click on the button in the top left corner (circle with down arrow). This will open up the PetriNet 'workspace' where you can develop your Petri Net model by dragging and dropping Place and Transition objects into the workspace, connecting them by hovering, using a source selector then dragging over to the next component you would like to connect to. You can alter the name attributes for the Places and Transitions and also the tokens attribute for Places to individualize your network and display the movement of tokens. 
 
-#Happy Petri Net Modeling!
+# Happy Petri Net Modeling!
 
 ## Classifying your Petri Net models
 The design studio, once in your PetriNet, will enable two methods of executing a plugin/interpreter to classify the Petri Net you have developed. 
@@ -51,6 +51,7 @@ Within the Petri Net Seed, there are a number of examples.
 The first set are classification examples. They are developed models which represent the classification type it is labeled as. Be sure to run the classification plugin/interpreter on the example model to verify! 
 
 The next examples are the following:
+
 *Tennis*
 The petri net model for tennis is quite simple. It has two players, Player1 and Player2, each represented by a Place. The transitions connecting the two players, are representative of the players hitting the ball. If Player1 hits the ball, the ball or token in this case, will go to Player2 and vice-versa. This model creates a loop due to this. Since there is only one ball used to play tennis, there is one initial token in the model, as indicated by Player1's token count. 
 
